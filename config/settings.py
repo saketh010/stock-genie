@@ -1,21 +1,23 @@
 import os
-from google import genai
+from groq import Groq
 from tavily import TavilyClient
 
-# Ensure environment variables are loaded if using a package like python-dotenv
-# For simplicity, we assume they are either in the env or loaded before this module is accessed.
+# Load environment variables
 try:
     from dotenv import load_dotenv
-    load_dotenv()
+    load_dotenv(override=True)
 except ImportError:
     pass
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
-if not GEMINI_API_KEY or not TAVILY_API_KEY:
-    print("WARNING: GEMINI_API_KEY or TAVILY_API_KEY not found in environment.")
+if not GROQ_API_KEY or not TAVILY_API_KEY:
+    print("WARNING: GROQ_API_KEY or TAVILY_API_KEY not found in environment.")
 
 # Initialize shared clients
-gemini_client = genai.Client(api_key=GEMINI_API_KEY) if GEMINI_API_KEY else None
+groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
 tavily_client = TavilyClient(api_key=TAVILY_API_KEY) if TAVILY_API_KEY else None
+
+# Model configuration — Llama 3.1 8B Instant is extremely fast, rate-limit friendly, and handles JSON mode perfectly
+GROQ_MODEL = "llama-3.1-8b-instant"

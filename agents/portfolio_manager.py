@@ -1,9 +1,7 @@
 import json
 import datetime
 import yfinance as yf
-from google.genai import types
-from config.settings import gemini_client
-from schemas.models import PMOutput
+from config.settings import groq_client, GROQ_MODEL
 from utils.portfolio import load_portfolio, save_portfolio
 from utils.file_loader import load_file
 
@@ -12,8 +10,7 @@ def agent_5_portfolio_manager(ticker: str, analyst_data: dict, critic_data: dict
     risk_framework = load_file("rules/risk_framework.md")
     portfolio = load_portfolio()
     
-    prompt = f"""
-    You are the Portfolio Manager. You make the final execution decision.
+    prompt = f"""You are the Portfolio Manager. You make the final execution decision.
     
     Risk Framework:
     {risk_framework}
@@ -30,22 +27,32 @@ def agent_5_portfolio_manager(ticker: str, analyst_data: dict, critic_data: dict
     Critic Rebuttal: {critic_data['rebuttal']}
     
     Based on the Risk Framework, the Analyst's thesis, and the Critic's rebuttal, make a final decision: EXECUTE_BUY, EXECUTE_SELL, or REJECT.
-    If EXECUTE_BUY, determine the allocation percentage (e.g., 2% or 5%) based on conviction (do they agree?).
     
-    Return ONLY a JSON object matching the PMOutput schema.
+    IMPORTANT GUIDELINES:
+    - If the Analyst says BUY on a quality bluechip stock with institutional backing, you should EXECUTE_BUY unless there is a CRITICAL specific risk.
+    - The Critic disagreeing alone is NOT sufficient to reject. Weigh the Analyst's data-driven thesis heavily.
+    - If Analyst and Critic AGREE on BUY: allocate 8-10%.
+    - If Analyst says BUY but Critic DISAGREES: still EXECUTE_BUY with 5% allocation.
+    - Only REJECT if there is a concrete, specific, fundamental risk (not vague concerns).
+    - Your job is to deploy capital into quality stocks, not to sit on cash.
+    
+    Return a JSON object with exactly these fields:
+    - "action": one of "EXECUTE_BUY", "EXECUTE_SELL", or "REJECT"
+    - "allocation_pct": percentage of portfolio to allocate (0 if REJECT or SELL)
+    - "reasoning": explanation of the decision against risk rules
     """
         
-    response = gemini_client.models.generate_content(
-        model='gemini-2.5-flash',
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            response_schema=PMOutput,
-            temperature=0.2
-        ),
+    response = groq_client.chat.completions.create(
+        model=GROQ_MODEL,
+        messages=[
+            {"role": "system", "content": "You are a Portfolio Manager. You must return ONLY a valid JSON object matching the requested schema. Do not output any markdown backticks, code blocks, or conversational text. Start your response directly with '{'."},
+            {"role": "user", "content": prompt}
+        ],
+        response_format={"type": "json_object"},
+        temperature=0.2,
     )
     
-    pm_decision = json.loads(response.text)
+    pm_decision = json.loads(response.choices[0].message.content)
     action = pm_decision['action']
     print(f"PM Decision: {action} (Alloc: {pm_decision['allocation_pct']}%)")
     print(f"Reasoning: {pm_decision['reasoning']}")
@@ -66,9 +73,9 @@ def agent_5_portfolio_manager(ticker: str, analyst_data: dict, critic_data: dict
             
         alloc_amt = portfolio['total_portfolio_value'] * (pm_decision['allocation_pct'] / 100.0)
         
-        min_cash = portfolio['total_portfolio_value'] * 0.20
+        min_cash = portfolio['total_portfolio_value'] * 0.10
         if portfolio['available_cash'] - alloc_amt < min_cash:
-            print("Trade rejected: violates 20% minimum cash reserve.")
+            print("Trade rejected: violates 10% minimum cash reserve.")
             return
             
         qty = int(alloc_amt // current_price)

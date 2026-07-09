@@ -1,9 +1,192 @@
 {
-  "total_portfolio_value": 1000000.0,
-  "available_cash": 1000000.0,
-  "net_pnl": 0.0,
-  "net_pnl_percentage": 0.0,
-  "total_trades": 0,
-  "active_holdings": [],
-  "trade_log": []
+    "total_portfolio_value": 999870.683918457,
+    "available_cash": 361981.73,
+    "net_pnl": 0.0,
+    "net_pnl_percentage": -0.012931608154298738,
+    "total_trades": 13,
+    "active_holdings": [
+        {
+            "ticker": "ICICIBANK.NS",
+            "avg_price": 1385.2,
+            "qty": 36
+        },
+        {
+            "ticker": "ETERNAL.NS",
+            "avg_price": 291.3,
+            "qty": 171
+        },
+        {
+            "ticker": "HDFCBANK.NS",
+            "avg_price": 819.2,
+            "qty": 61
+        },
+        {
+            "ticker": "MARICO.NS",
+            "avg_price": 858.4,
+            "qty": 58
+        },
+        {
+            "ticker": "ONGC.NS",
+            "avg_price": 244.58,
+            "qty": 204
+        },
+        {
+            "ticker": "UNOMINDA.NS",
+            "avg_price": 1161.0,
+            "qty": 43
+        },
+        {
+            "ticker": "MARUTI.NS",
+            "avg_price": 13785.0,
+            "qty": 3
+        },
+        {
+            "ticker": "BAJAJFINSV.NS",
+            "avg_price": 1887.3,
+            "qty": 26
+        },
+        {
+            "ticker": "IOC.NS",
+            "avg_price": 137.95,
+            "qty": 362
+        },
+        {
+            "ticker": "BPCL.NS",
+            "avg_price": 306.65,
+            "qty": 163
+        },
+        {
+            "ticker": "RELIANCE.NS",
+            "avg_price": 1291.0,
+            "qty": 38
+        },
+        {
+            "ticker": "INFY.NS",
+            "avg_price": 1058.2,
+            "qty": 47
+        },
+        {
+            "ticker": "STARHEALTH.NS",
+            "avg_price": 590.75,
+            "qty": 84
+        }
+    ],
+    "trade_log": [
+        {
+            "timestamp": "2026-07-09T12:38:31+00:00",
+            "ticker": "ICICIBANK.NS",
+            "action": "BUY",
+            "price": 1385.2,
+            "qty": 36,
+            "reasoning": "The Analyst's BUY thesis on ICICIBANK.NS is data-driven and supported by institutional sentiment. Although the Critic disagrees, citing concerns about the Analyst's methodology, the Critic's disagreement alone is not sufficient to reject the trade. Given the quality bluechip stock's institutional backing and the Analyst's thesis, the default decision is to EXECUTE_BUY with a 5% allocation, as per the Risk Framework.",
+            "realized_pnl": 0.0
+        },
+        {
+            "timestamp": "2026-07-09T12:39:35+00:00",
+            "ticker": "ETERNAL.NS",
+            "action": "BUY",
+            "price": 291.3,
+            "qty": 171,
+            "reasoning": "The Analyst's BUY thesis on ETERNAL.NS is data-driven and considers the stock's long-term growth potential. Although the Critic disagrees, citing bearish institutional sentiment and a recent sell signal, the Analyst's thesis is fundamentally sound. Given the importance of following institutional smart money and the 'Quality First' tenet, the Critic's concerns are not sufficient to reject the trade. The decision to EXECUTE_BUY with a 5% allocation is based on the Analyst's thesis and the need to deploy capital into quality stocks.",
+            "realized_pnl": 0.0
+        },
+        {
+            "timestamp": "2026-07-09T12:40:43+00:00",
+            "ticker": "HDFCBANK.NS",
+            "action": "BUY",
+            "price": 819.2,
+            "qty": 61,
+            "reasoning": "Despite the Critic's disagreement, the Analyst's data-driven thesis on HDFCBANK.NS is compelling, with a strong buy consensus from 46 analysts and 5-Year Return of 16.65%. The Critic's concerns about the recent 6-Month Return of -11.26% and 1-Year Return of -16.92% are valid, but do not outweigh the Analyst's thesis. Given the institutional sentiment is bullish, we default to EXECUTE_BUY with a 5% allocation.",
+            "realized_pnl": 0.0
+        },
+        {
+            "timestamp": "2026-07-09T12:42:34+00:00",
+            "ticker": "MARICO.NS",
+            "action": "BUY",
+            "price": 858.4,
+            "qty": 58,
+            "reasoning": "The Analyst's BUY thesis on MARICO.NS is based on solid fundamental and technical indicators, despite the Critic's disagreement. Given the stock's quality bluechip status and institutional backing, the default decision is to EXECUTE_BUY, with a 5% allocation as per the Risk Framework.",
+            "realized_pnl": 0.0
+        },
+        {
+            "timestamp": "2026-07-09T12:43:19+00:00",
+            "ticker": "ONGC.NS",
+            "action": "BUY",
+            "price": 244.58,
+            "qty": 204,
+            "reasoning": "The Analyst's thesis is fundamentally sound despite the Critic's disagreement. The Analyst's data-driven recommendation for ONGC.NS is not overly cautious, and the Critic's concerns about the 'Growth-Oriented Approach' and 'Momentum is Your Friend' principles do not outweigh the strong long-term growth potential and medium-term uptrend. As per the Risk Framework, when the Analyst says BUY but the Critic disagrees, we should still EXECUTE_BUY with a 5% allocation.",
+            "realized_pnl": 0.0
+        },
+        {
+            "timestamp": "2026-07-09T12:43:48+00:00",
+            "ticker": "UNOMINDA.NS",
+            "action": "BUY",
+            "price": 1161.0,
+            "qty": 43,
+            "reasoning": "The Analyst's BUY thesis for Uno Minda Limited outweighs the Critic's concerns, despite the medium-term bearish trend. The stock's short-term momentum and institutional sentiment are positive, and the long-term growth potential justifies the BUY recommendation. The Critic's disagreement alone is not sufficient to reject, and the Analyst's data-driven thesis takes precedence.",
+            "realized_pnl": 0.0
+        },
+        {
+            "timestamp": "2026-07-09T12:46:49+00:00",
+            "ticker": "MARUTI.NS",
+            "action": "BUY",
+            "price": 13785.0,
+            "qty": 3,
+            "reasoning": "The Analyst's SELL thesis is not convincing enough to override the stock's quality and institutional backing. The Critic's disagreement is noted, but the Analyst's data-driven thesis is weighed heavily. A 5% allocation is made to capture potential upside while maintaining a minimum cash reserve.",
+            "realized_pnl": 0.0
+        },
+        {
+            "timestamp": "2026-07-09T12:48:23+00:00",
+            "ticker": "BAJAJFINSV.NS",
+            "action": "BUY",
+            "price": 1887.3,
+            "qty": 26,
+            "reasoning": "Given the Analyst's data-driven thesis and the Critic's disagreement, we weigh the Analyst's recommendation heavily. Although the Critic raises valid points, the Analyst's focus on the stock's quality and long-term fundamentals outweighs the Critic's concerns about short-term market fluctuations. As per the Risk Framework, we allocate 5% of the portfolio value for this trade, as the Analyst and Critic disagree.",
+            "realized_pnl": 0.0
+        },
+        {
+            "timestamp": "2026-07-09T12:54:26+00:00",
+            "ticker": "IOC.NS",
+            "action": "BUY",
+            "price": 137.95,
+            "qty": 362,
+            "reasoning": "The Analyst's thesis is data-driven and supported by institutional backing. Although the Critic disagrees, their concerns are based on a 'Growth-Oriented Approach' tenet that may not be applicable in this case. The Analyst's reliance on Moving Averages is a valid consideration, and the Critic's suggestion to consider both short-term and long-term performance is acknowledged. However, the Analyst's thesis takes precedence, and the Critic's disagreement alone is not sufficient to reject. Therefore, the decision is to EXECUTE_BUY with a 5% allocation.",
+            "realized_pnl": 0.0
+        },
+        {
+            "timestamp": "2026-07-09T12:56:31+00:00",
+            "ticker": "BPCL.NS",
+            "action": "BUY",
+            "price": 306.65,
+            "qty": 163,
+            "reasoning": "The Analyst's thesis on BPCL.NS is data-driven and prioritizes quality over short-term gains. Although the Critic disagrees, their concerns are not concrete and specific enough to override the Analyst's recommendation. Given the stock's strong long-term growth story and institutional backing, the default decision is to EXECUTE_BUY with a 5% allocation, as per the Risk Framework.",
+            "realized_pnl": 0.0
+        },
+        {
+            "timestamp": "2026-07-09T12:57:59+00:00",
+            "ticker": "RELIANCE.NS",
+            "action": "BUY",
+            "price": 1291.0,
+            "qty": 38,
+            "reasoning": "The Analyst's HOLD thesis for RELIANCE.NS is overridden by the Critic's disagreement, which aligns with our Trading Philosophy. Given the Critic's rebuttal and the institutional smart money backing the stock, we should EXECUTE_BUY with a 5% allocation, as per the Standard Allocation rule.",
+            "realized_pnl": 0.0
+        },
+        {
+            "timestamp": "2026-07-09T12:59:17+00:00",
+            "ticker": "INFY.NS",
+            "action": "BUY",
+            "price": 1058.2,
+            "qty": 47,
+            "reasoning": "Given the Analyst's data-driven thesis and the Critic's disagreement, we weigh the Analyst's view heavily. Although the Critic raises concerns about the long-term bearish trend, the Analyst's short-term recovery thesis is compelling. Considering the institutional backing and the Critic's disagreement alone is not sufficient to reject, we decide to EXECUTE_BUY with a 5% allocation.",
+            "realized_pnl": 0.0
+        },
+        {
+            "timestamp": "2026-07-09 13:08:37",
+            "ticker": "STARHEALTH.NS",
+            "action": "BUY",
+            "price": 590.75,
+            "qty": 84,
+            "reasoning": "The Analyst's BUY thesis on STARHEALTH.NS is data-driven and supported by institutional backing. Although the Critic disagrees, citing the stock's negative 5-year return, this alone is not sufficient to reject the trade. Given the Analyst's thesis and the importance of deploying capital into quality stocks, we will EXECUTE_BUY with a 5% allocation."
+        }
+    ]
 }

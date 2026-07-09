@@ -1,6 +1,6 @@
 import time
 import datetime
-from config.settings import GEMINI_API_KEY
+from config.settings import GROQ_API_KEY
 from agents.screener import agent_1_screener
 from agents.intelligence import agent_2_intelligence
 from agents.analyst import agent_3_analyst
@@ -24,14 +24,14 @@ def run_pipeline():
             analyst = agent_3_analyst(ticker, intel)
             critic = agent_4_critic(ticker, analyst)
             agent_5_portfolio_manager(ticker, analyst, critic)
-            time.sleep(2) # Prevent extreme rate limiting
+            time.sleep(2)  # Small delay between stocks (Groq handles rate limits well)
         except Exception as e:
             print(f"Error processing {ticker}: {e}")
             
     print("Pipeline execution complete.")
 
 if __name__ == "__main__":
-    if not GEMINI_API_KEY:
-        print("Please set GEMINI_API_KEY environment variable in your .env file or system. Exiting.")
+    if not GROQ_API_KEY:
+        print("Please set GROQ_API_KEY environment variable in your .env file or system. Exiting.")
     else:
         run_pipeline()

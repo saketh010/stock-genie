@@ -28,26 +28,52 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-PORTFOLIO_FILE = "paper_portfolio.json"
+from utils.portfolio import load_portfolio
+from main import run_pipeline
+import sys
+import contextlib
 
-@st.cache_data(ttl=5) # Auto refresh data every 5 seconds if running locally
-def load_data():
-    if os.path.exists(PORTFOLIO_FILE):
-        try:
-            with open(PORTFOLIO_FILE, 'r') as f:
-                return json.load(f)
-        except:
-            return None
-    return None
+class StreamlitRedirect:
+    def __init__(self, placeholder):
+        self.placeholder = placeholder
+        self.buffer = ""
+    def write(self, string):
+        self.buffer += string
+        self.placeholder.text(self.buffer)
+    def flush(self):
+        pass
+
+@contextlib.contextmanager
+def st_capture(placeholder):
+    old_stdout = sys.stdout
+    sys.stdout = StreamlitRedirect(placeholder)
+    try:
+        yield
+    finally:
+        sys.stdout = old_stdout
 
 def main():
     st.title("📈 Autonomous Indian Stock Market Trading Agent")
     st.markdown("### A 5-Agent Pipeline Paper Trading Dashboard (NSE)")
     
-    data = load_data()
+    col_btn, _ = st.columns([1, 4])
+    with col_btn:
+        if st.button("🚀 Start Review (Run Agents)", width="stretch"):
+            st.session_state.run_agents = True
+
+    # If button was clicked, run the pipeline with streaming logs
+    if getattr(st.session_state, 'run_agents', False):
+        st.markdown("### 🧠 Live Agent Reasoning")
+        log_placeholder = st.empty()
+        with st_capture(log_placeholder):
+            run_pipeline()
+        st.success("Pipeline Execution Complete!")
+        st.session_state.run_agents = False
+    
+    data = load_portfolio()
     
     if not data:
-        st.warning("No portfolio data found. Please run the `agent_engine.py` pipeline at least once to initialize `paper_portfolio.json`.")
+        st.warning("No portfolio data found. Run the pipeline to initialize.")
         return
 
     # Top Metrics
@@ -73,11 +99,13 @@ def main():
         df_holdings = pd.DataFrame(holdings)
         # Reorder and format columns
         df_holdings.columns = ['Ticker', 'Average Price', 'Quantity']
+        df_holdings['Average Price'] = pd.to_numeric(df_holdings['Average Price'], errors='coerce')
+        df_holdings['Quantity'] = pd.to_numeric(df_holdings['Quantity'], errors='coerce')
         df_holdings['Total Cost'] = df_holdings['Average Price'] * df_holdings['Quantity']
         st.dataframe(df_holdings.style.format({
             "Average Price": "₹{:.2f}",
             "Total Cost": "₹{:.2f}"
-        }), use_container_width=True, hide_index=True)
+        }), width="stretch", hide_index=True)
     else:
         st.info("No active holdings at the moment. Cash is a position!")
 
@@ -111,7 +139,7 @@ def main():
                 "realized_pnl": "Realized P&L"
             },
             hide_index=True,
-            use_container_width=True
+            width="stretch"
         )
     else:
         st.info("No trades executed yet.")
